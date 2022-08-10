@@ -1,0 +1,17 @@
+{
+  "name": "fpl-insight-api",
+  "version": "1.0.0",
+  "description": "API for FPL Insight app",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Will Garrett",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "sqlite3": "^5.0.11",
+    "superagent": "^8.0.0"
+  }
+}
