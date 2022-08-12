@@ -1,19 +1,21 @@
-const express = require('express')
+import express from 'express'
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 
-const superagent = require('superagent')
-// const db = require('./db/db')
+import fplCache from './cache.js'
 
-const getDataTest = async (req, res) => {
-  const response = await superagent.get('https://fantasy.premierleague.com/api/bootstrap-static/')
-  res.send(response.body)
-}
+import superagent from 'superagent'
+import { updateData } from './sync/updateData.js'
+// import db from './db/db'
 
-app.get('/', (req, res) => {
-  getDataTest(req, res)
+import fplRouter from './api/fpl/index.js'
+
+app.use('/fpl', (req, res) => {
+  fplRouter(req, res)
 })
 
-app.listen(port, () => {
+app.listen(port, async () => {
+  const data = await updateData(fplCache)
+  fplCache.set('allData', data)
   console.log(`FPL Insight API listening on ${port}`)
 })
