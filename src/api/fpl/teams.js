@@ -13,7 +13,7 @@ export const getTeam = () => async (req, res) => {
 export const getTeams = () => async (req, res) => {
   const allTeams = await fplCache.get('teams')
   // options
-  const page = req.query.page || 1
-  const limit = req.query.limit || 20
+  const page = Number(req.query.page) || 1
+  const limit = Number(req.query.limit) || 20
   res.send(getPageResults(allTeams, page, limit))
 }
