@@ -14,20 +14,20 @@ export async function calcPlayerStats(fplCache, player) {
 
   switch (player.element_type) {
     case 1:
-      newPlayer.position = 'GKP'
-      newPlayer.full_position = 'goalkeepers'
+      newPlayer.position = 'gkp'
+      newPlayer.full_position = 'goalkeeper'
       break
     case 2:
-      newPlayer.position = 'DEF'
-      newPlayer.full_position = 'defenders'
+      newPlayer.position = 'def'
+      newPlayer.full_position = 'defender'
       break
     case 3:
-      newPlayer.position = 'MID'
-      newPlayer.full_position = 'midfielders'
+      newPlayer.position = 'mid'
+      newPlayer.full_position = 'midfielder'
       break
     case 4:
-      newPlayer.position = 'FWD'
-      newPlayer.full_position = 'forwards'
+      newPlayer.position = 'fwd'
+      newPlayer.full_position = 'forward'
       break
   }
 

@@ -1,7 +1,9 @@
 import superagent from 'superagent'
 import { calcPlayerStats } from './calcPlayerStats.js'
 
-export const updateData = (fplCache) => {
+import fplCache from '../cache.js'
+
+export const updateData = () => {
   return Promise.all([
     superagent.get('https://fantasy.premierleague.com/api/bootstrap-static/'),
     superagent.get('https://fantasy.premierleague.com/api/fixtures/')

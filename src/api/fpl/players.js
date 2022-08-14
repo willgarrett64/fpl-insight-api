@@ -1,4 +1,5 @@
 import fplCache from '../../cache.js'
+import { filterPlayers } from '../../utils/filter.js'
 import { getPageResults } from '../../utils/pagination.js'
 
 // get player by id
@@ -12,8 +13,12 @@ export const getPlayer = () => async (req, res) => {
 // get players
 export const getPlayers = () => async (req, res) => {
   const allPlayers = await fplCache.get('players')
-  // options
+
+  const filteredPlayers = filterPlayers(req, allPlayers)
+
+  // pagination
   const page = Number(req.query.page) || 1
   const limit = Number(req.query.limit) || 40
-  res.send(getPageResults(allPlayers, page, limit))
+
+  res.send(getPageResults(filteredPlayers, page, limit))
 }
