@@ -3,38 +3,34 @@ import { calcPlayerStats } from './calcPlayerStats.js'
 
 import fplCache from '../cache.js'
 
-export const updateData = () => {
-  return Promise.all([
+export const updateData = async () => {
+  const [dataResponse, fixturesResponse] = await Promise.all([
     superagent.get('https://fantasy.premierleague.com/api/bootstrap-static/'),
     superagent.get('https://fantasy.premierleague.com/api/fixtures/')
   ])
-  .then(([dataResponse, fixturesResponse]) => {
-    const data = dataResponse.body
-    const fixtures = fixturesResponse.body
+  const data = dataResponse.body
+  const fixtures = fixturesResponse.body
 
-    console.info('Saving teams')
-    fplCache.set('teams', data.teams)
+  console.info('Team data cached')
+  fplCache.set('teams', data.teams)
 
-    console.info('Saving events (gameweeks)')
-    fplCache.set('events', data.events)
+  fplCache.set('events', data.events)
+  console.info('Event (gameweeks) data cached')
 
-    console.info('Saving fixtures')
-    fplCache.set('fixtures', fixtures)
-    data.fixtures = fixtures
+  fplCache.set('fixtures', fixtures)
+  data.fixtures = fixtures
+  console.info('Fixture data cached')
 
-    const currentGw = (data.events.find(gw => gw.is_current)).id
-    data.currentGw = currentGw
-    console.info('Saving current gameweek')
-    fplCache.set('currentGw', currentGw)
+  const currentGw = (data.events.find(gw => gw.is_current)).id
+  data.currentGw = currentGw
+  fplCache.set('currentGw', currentGw)
+  console.info('Current gameweek data cached')
 
-    return Promise.all(data.elements.map(player => {
-      return calcPlayerStats(fplCache, player)
-    }))
-    .then(playersData => {
-      data.elements = playersData
-      console.info('Saving players')
-      fplCache.set('players', playersData)
-      return data
-    })
-  })
+  const playersData = await Promise.all(data.elements.map(player => {
+    return calcPlayerStats(player)
+  }))
+  data.elements = playersData
+  fplCache.set('players', playersData)
+  console.info('Player data cached')
+  return data
 }
