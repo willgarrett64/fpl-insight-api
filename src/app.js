@@ -14,7 +14,6 @@ import fplRouter from './api/fpl/index.js'
 
 app.use('/fpl', (req, res) => {
   fplRouter(req, res)
-  // usersRouter(req, res)
 })
 
 app.listen(port, async () => {

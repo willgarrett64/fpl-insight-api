@@ -14,6 +14,9 @@ export const updateData = async () => {
   console.info('Team data cached')
   fplCache.set('teams', data.teams)
 
+  console.info('Position data cached')
+  fplCache.set('positions', data.element_types)
+
   fplCache.set('events', data.events)
   console.info('Event (gameweeks) data cached')
 
