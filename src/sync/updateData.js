@@ -21,19 +21,15 @@ export const updateData = async () => {
   console.info('Event (gameweeks) data cached')
 
   fplCache.set('fixtures', fixtures)
-  data.fixtures = fixtures
   console.info('Fixture data cached')
 
   const currentGw = (data.events.find(gw => gw.is_current)).id
-  data.currentGw = currentGw
   fplCache.set('currentGw', currentGw)
   console.info('Current gameweek data cached')
 
   const playersData = await Promise.all(data.elements.map(player => {
     return calcPlayerStats(player)
   }))
-  data.elements = playersData
   fplCache.set('players', playersData)
   console.info('Player data cached')
-  return data
 }
