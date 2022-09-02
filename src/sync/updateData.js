@@ -1,5 +1,6 @@
 import superagent from 'superagent'
 import { calcPlayerStats } from './calcPlayerStats.js'
+import * as cleanFpl from './cleanFplData.js'
 
 import fplCache from '../cache.js'
 
@@ -12,15 +13,15 @@ export const updateData = async () => {
   const fixtures = fixturesResponse.body
 
   console.info('Team data cached')
-  fplCache.set('teams', data.teams)
+  fplCache.set('teams', cleanFpl.teams(data.teams))
 
   console.info('Position data cached')
-  fplCache.set('positions', data.element_types)
+  fplCache.set('positions', cleanFpl.positions(data.element_types))
 
-  fplCache.set('events', data.events)
+  fplCache.set('events', cleanFpl.events(data.events))
   console.info('Event (gameweeks) data cached')
 
-  fplCache.set('fixtures', fixtures)
+  fplCache.set('fixtures', cleanFpl.fixtures(fixtures, data.teams))
   console.info('Fixture data cached')
 
   const currentGw = (data.events.find(gw => gw.is_current)).id
