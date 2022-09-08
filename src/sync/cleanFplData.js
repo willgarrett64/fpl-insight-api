@@ -10,7 +10,6 @@ export const cleanseData = (data, keys) => {
 }
 
 // extract team name (e.g. Arsenal) and short name (e.g. ARS) from team ID
-const teamsData = fplCache.get('teams')
 const getTeamName = (teamId, teams) => {
   const team = teams.find(team => teamId === team.id)
   return {

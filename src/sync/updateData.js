@@ -1,5 +1,6 @@
 import superagent from 'superagent'
 import { calcPlayerStats } from './calcPlayerStats.js'
+import { getMaxStats } from './maxPlayerStats.js'
 import * as cleanFpl from './cleanFplData.js'
 
 import fplCache from '../cache.js'
@@ -33,4 +34,8 @@ export const updateData = async () => {
   }))
   fplCache.set('players', playersData)
   console.info('Player data cached')
+
+  const maxStats = getMaxStats(playersData)
+  fplCache.set('maxPlayerStats', maxStats)
+  console.info('Max player stats cached')
 }

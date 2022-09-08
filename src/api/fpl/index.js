@@ -1,7 +1,7 @@
 import express from 'express'
 import { getEvent, getEvents } from './events.js'
 import { getFixture, getFixtures, getFixturesByEvent, getFixturesByTeam } from './fixtures.js'
-import { getPlayer, getPlayers } from './players.js'
+import { getPlayer, getPlayers, getMaxPlayerStats } from './players.js'
 import { getPositions } from './positions.js'
 import { getTeam, getTeams } from './teams.js'
 
@@ -20,6 +20,7 @@ fplRouter.get('/fixtures/team/:team', getFixturesByTeam())
 // players (premier league players)
 fplRouter.get('/player/:id', getPlayer())
 fplRouter.get('/players', getPlayers())
+fplRouter.get('/players/max', getMaxPlayerStats())
 
 // positions (element types)
 fplRouter.get('/positions', getPositions())

@@ -22,3 +22,9 @@ export const getPlayers = () => async (req, res) => {
 
   res.send(getPageResults(filteredPlayers, page, limit))
 }
+
+// get max player stats
+export const getMaxPlayerStats = () => async (req, res) => {
+  const maxStats = await fplCache.get('maxPlayerStats')
+  res.send(maxStats)
+}
