@@ -14,6 +14,6 @@ export const getEvents = () => async (req, res) => {
   let events = await fplCache.get('events')
   // options
   const page = Number(req.query.page) || 1
-  const limit = Number(req.query.limit) || 20
+  const limit = Number(req.query.limit) || 38
   res.send(getPageResults(events, page, limit))
 }
