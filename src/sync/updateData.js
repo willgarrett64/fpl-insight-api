@@ -29,9 +29,17 @@ export const updateData = async () => {
   fplCache.set('currentGw', currentGw)
   console.info('Current gameweek data cached')
 
-  const playersData = await Promise.all(data.elements.map(player => {
-    return calcPlayerStats(player)
-  }))
+  const playersData = []
+  for (let i = 0; i < data.elements.length; i+=10) {
+    const playerStats = await Promise.all(data.elements.slice(i, i+10).map(player => {
+      return calcPlayerStats(player)
+    }))
+    console.info(`Calculating players stats, IDs ${i + 1} to ${i + 10} `)
+    playersData.push(...playerStats)
+  }
+  // await Promise.all(data.elements.map(player => {
+  //   return calcPlayerStats(player)
+  // }))
   fplCache.set('players', playersData)
   console.info('Player data cached')
 
