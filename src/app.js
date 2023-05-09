@@ -4,7 +4,7 @@ const app = express()
 app.use(cors())
 const port = process.env.PORT || 3001
 
-// import db from './db/db'
+import db from './db'
 
 // import superagent from 'superagent'
 import { updateData } from './sync/updateData.js'

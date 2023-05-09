@@ -1,19 +1,24 @@
 {
   "name": "fpl-insight-api",
-  "version": "1.0.0",
-  "description": "API for FPL Insight app",
-  "main": "app.js",
+  "version": "0.0.1",
+  "description": "API for FPL Insight",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/app.js",
-    "start": "node --optimize_for_size --max_old_space_size=460 src/app.js",
+    "dev": "nodemon src/index.js",
+    "start": "node --optimize_for_size --max_old_space_size=460 src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Will Garrett",
   "license": "ISC",
   "dependencies": {
+    "@edge/log": "^1.6.2",
+    "arangojs": "^8.2.1",
+    "arangosearch": "^1.1.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.1",
+    "http": "^0.0.1-security",
     "node-cache": "^5.1.2",
     "sqlite3": "^5.0.11",
     "superagent": "^8.0.0"

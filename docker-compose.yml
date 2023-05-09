@@ -1,0 +1,14 @@
+version: "3"
+
+volumes:
+  data:
+
+services:
+  arangodb:
+    image: arangodb:latest
+    volumes:
+      - data:/var/lib/arangodb3
+    environment:
+      ARANGO_ROOT_PASSWORD: root
+    ports:
+      - "8530:8529"
