@@ -1,6 +1,5 @@
 import { Collection } from './collection.js'
 import { Database as ArangoDB } from 'arangojs'
-// import { EventsCollection } from './collections/events.js'
 
 const collectionNames = [
   'events',

@@ -23,20 +23,24 @@ export class Collection {
     return await this.collection.documents(keys)
   }
 
-  async insert(value) {
-    const record = await this.collection.save(value)
+  async insert(value, updateExisting) {
+    const record = await this.collection.save(value,
+      { overwriteMode: updateExisting && 'update' }
+    )
     this.log.debug('Record inserted', { record })
     return record
   }
-  async insertMany(values) {
-    const records = await this.collection.saveAll(values)
+  async insertMany(values, updateExisting) {
+    const records = await this.collection.saveAll(values,
+      { overwriteMode: updateExisting && 'update' }
+    )
     this.log.debug('Records inserted', records.map(r => r._key))
     return records
   }
 
   async update(value) {
-    const record = await this.collection.update(value._key, value)
-    this.log.debug('Record updated', { record })
+    const record = await this.collection.save(value)
+    this.log.debug('Record inserted', { record })
     return record
   }
   async updateMany(values) {
